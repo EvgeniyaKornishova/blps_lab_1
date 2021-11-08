@@ -35,6 +35,8 @@ public class WatchlistController  {
     @GetMapping("/")
     public ResponseEntity<?> listWatchlists(Principal principal){
         User user = userRepository.findByUsername(principal.getName());
+        if (user == null)
+            return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
 
         return new ResponseEntity<List<WatchlistDto>>(WatchlistDto.fromWatchlistsCollection(user.getWatchlists()), HttpStatus.OK);
     }
@@ -42,6 +44,8 @@ public class WatchlistController  {
     @PostMapping("/")
     public ResponseEntity<?> createWatchlist(Principal principal, @RequestBody WatchlistInDto watchlistInDto){
         User user = userRepository.findByUsername(principal.getName());
+        if (user == null)
+            return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
 
         if (watchlistRepository.existsWatchlistByNameAndUser(watchlistInDto.getName(), user))
             return new ResponseEntity<String>("Watchlist with specified name already exists", HttpStatus.CONFLICT);
@@ -58,6 +62,9 @@ public class WatchlistController  {
     @GetMapping("/{watchlist_id}")
     public ResponseEntity<?> getWatchlist(@PathVariable("watchlist_id") Long id, Principal principal){
         User user = userRepository.findByUsername(principal.getName());
+        if (user == null)
+            return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
+
         Optional<Watchlist> watchlist = watchlistRepository.findByIdAndUser(id, user);
 
         if (!watchlist.isPresent())
@@ -69,6 +76,9 @@ public class WatchlistController  {
     @DeleteMapping("/{watchlist_id}")
     public ResponseEntity<?> deleteWatchlist(@PathVariable("watchlist_id") Long id, Principal principal) {
         User user = userRepository.findByUsername(principal.getName());
+        if (user == null)
+            return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
+
         Optional<Watchlist> watchlist = watchlistRepository.findByIdAndUser(id, user);
 
         if (!watchlist.isPresent())
@@ -82,6 +92,9 @@ public class WatchlistController  {
     @PutMapping("/{watchlist_id}")
     public ResponseEntity<?> updateWatchlist(@PathVariable("watchlist_id") Long id, @RequestBody WatchlistInDto watchlistInDto, Principal principal){
         User user = userRepository.findByUsername(principal.getName());
+        if (user == null)
+            return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
+
         Optional<Watchlist> watchlist = watchlistRepository.findByIdAndUser(id, user);
 
         if (!watchlist.isPresent())
@@ -100,6 +113,8 @@ public class WatchlistController  {
     @PostMapping("/{watchlist_id}/equities/{equity_id}")
     public ResponseEntity<?> addEquityToWatchlist(@PathVariable Long watchlist_id, @PathVariable Long equity_id, Principal principal){
         User user = userRepository.findByUsername(principal.getName());
+        if (user == null)
+            return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
 
         Optional<Watchlist> watchlist = watchlistRepository.findByIdAndUser(watchlist_id, user);
         if (!watchlist.isPresent())
@@ -122,6 +137,8 @@ public class WatchlistController  {
     @GetMapping("/{watchlist_id}/equities")
     public ResponseEntity<?> listEquitiesFromWatchlist(@PathVariable("watchlist_id") Long id, Principal principal){
         User user = userRepository.findByUsername(principal.getName());
+        if (user == null)
+            return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
 
         Optional<Watchlist> watchlist = watchlistRepository.findByIdAndUser(id, user);
         if (!watchlist.isPresent())
@@ -133,6 +150,8 @@ public class WatchlistController  {
     @DeleteMapping("/{watchlist_id}/equities/{equity_id}")
     public ResponseEntity<?> excludeEquityFromWatchlist(@PathVariable Long watchlist_id, @PathVariable Long equity_id, Principal principal){
         User user = userRepository.findByUsername(principal.getName());
+        if (user == null)
+            return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
 
         Optional<Watchlist> watchlist = watchlistRepository.findByIdAndUser(watchlist_id, user);
         if (!watchlist.isPresent())
@@ -155,6 +174,8 @@ public class WatchlistController  {
     @PostMapping("/{watchlist_id}/equities/{equity_id}/notification")
     public ResponseEntity<?> createNotification(@PathVariable Long watchlist_id, @PathVariable Long equity_id, @RequestBody NotificationRuleInDto notificationRuleInDto, Principal principal) {
         User user = userRepository.findByUsername(principal.getName());
+        if (user == null)
+            return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
 
         Optional<Watchlist> watchlist = watchlistRepository.findByIdAndUser(watchlist_id, user);
         if (!watchlist.isPresent())

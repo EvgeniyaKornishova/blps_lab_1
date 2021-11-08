@@ -26,7 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("userDetailsServiceImpl")
     private UserDetailsService userDetailsService;
 
-
     @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception{
         return authenticationManager();
@@ -45,8 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/equities/**").permitAll()
-                .antMatchers("/register", "/login").permitAll()
+                .antMatchers(HttpMethod.GET, "/equities", "/equities/**").permitAll()
+                .antMatchers("/register", "/login", "/swagger-ui/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()

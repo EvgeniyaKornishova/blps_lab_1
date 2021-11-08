@@ -30,12 +30,17 @@ public class UserController {
     @GetMapping("/me")
     public ResponseEntity<?> aboutMe(Principal principal){
         User user = userService.findByUsername(principal.getName());
+        if (user == null)
+            return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
+
         return new ResponseEntity<UserDto>(UserDto.fromUser(user), HttpStatus.OK);
     }
 
     @GetMapping("/me/notifications")
     public ResponseEntity<?> listNotifications(Principal principal) {
         User user = userService.findByUsername(principal.getName());
+        if (user == null)
+            return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
 
         List<Notification> notifications = user.getNotifications();
 
@@ -45,6 +50,8 @@ public class UserController {
     @GetMapping("/me/notification_rules")
     public ResponseEntity<?> listNotificationRules(Principal principal) {
         User user = userService.findByUsername(principal.getName());
+        if (user == null)
+            return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
 
         List<NotificationRule> notificationRules = user.getNotificationRules();
 

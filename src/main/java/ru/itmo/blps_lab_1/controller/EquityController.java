@@ -1,5 +1,8 @@
 package ru.itmo.blps_lab_1.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +24,14 @@ public class EquityController {
     EquityRepository equityRepository;
 
     @GetMapping("/")
+    @ApiOperation(value = "Get list of equities", response = EquityDto.class, responseContainer = "List")
     public ResponseEntity<?> listEquities(){
         List<Equity> equities = equityRepository.findAll();
         return new ResponseEntity<List<EquityDto>>(EquityDto.fromEquitiesList(equities), HttpStatus.OK);
     }
 
     @GetMapping("/{equity_id}")
+    @ApiOperation(value = "Get equity by id", response = EquityDto.class)
     public ResponseEntity<?> getEquity(@PathVariable("equity_id") Long id){
         Optional<Equity> equity = equityRepository.findById(id);
         if (!equity.isPresent())
