@@ -6,9 +6,7 @@ import javax.persistence.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static javax.persistence.CascadeType.ALL;
 
@@ -24,9 +22,15 @@ public class User {
 
     private String password;
 
+    private Long violationsCount = 0L;
+
     @OneToMany(cascade = ALL, mappedBy = "user")
     @EqualsAndHashCode.Exclude
     private List<Watchlist> watchlists = new ArrayList<>();
+
+    @OneToMany(cascade = ALL, mappedBy = "author")
+    @EqualsAndHashCode.Exclude
+    private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(cascade = ALL, mappedBy = "user")
     @EqualsAndHashCode.Exclude
@@ -35,6 +39,16 @@ public class User {
     @OneToMany(cascade = ALL, mappedBy = "user")
     @EqualsAndHashCode.Exclude
     private List<Notification> notifications = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id", nullable = false, updatable = false),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id", nullable = false, updatable = false))
+    @EqualsAndHashCode.Exclude
+    private List<Role> roles = new ArrayList<>();
 
     public static String hash_password(String password){
         MessageDigest msgDgst;

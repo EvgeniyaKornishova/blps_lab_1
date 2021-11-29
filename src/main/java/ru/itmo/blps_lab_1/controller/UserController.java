@@ -15,9 +15,11 @@ import ru.itmo.blps_lab_1.data.dto.NotificationDto;
 import ru.itmo.blps_lab_1.data.dto.NotificationRuleDto;
 import ru.itmo.blps_lab_1.data.dto.UserDto;
 import ru.itmo.blps_lab_1.data.dto.UserInDto;
+import ru.itmo.blps_lab_1.repository.RoleRepository;
 import ru.itmo.blps_lab_1.service.UserService;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -26,6 +28,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RoleRepository roleRepository;
 
     @GetMapping("/me")
     public ResponseEntity<?> aboutMe(Principal principal){
@@ -60,22 +65,19 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@RequestBody UserInDto userInDto){
-        System.out.println("Client register start");
         if (userService.findByUsername(userInDto.getUsername()) != null){
             return new ResponseEntity<>(
                     "User with username " + userInDto.getUsername() + " already exist",
                     HttpStatus.CONFLICT
             );
         }
-        System.out.println("Client hasn't conflicts");
 
         User user = new User();
         user.setUsername(userInDto.getUsername());
         user.setPassword(userInDto.getPassword());
+        user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
 
-        System.out.println("Client pre save");
         userService.save(user);
-        System.out.println("Client post save");
 
         return new ResponseEntity<UserDto>(UserDto.fromUser(user), HttpStatus.CREATED);
     }

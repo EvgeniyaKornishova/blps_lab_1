@@ -51,5 +51,9 @@ public class Equity {
 
     @OneToMany(cascade = ALL, mappedBy = "equity")
     @EqualsAndHashCode.Exclude
+    private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(cascade = ALL, mappedBy = "equity")
+    @EqualsAndHashCode.Exclude
     private Set<NotificationRule> notificationRules = new HashSet<>();
 }

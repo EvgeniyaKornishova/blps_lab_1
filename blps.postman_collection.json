@@ -1,0 +1,575 @@
+{
+	"info": {
+		"_postman_id": "acbaf4d9-3b08-4b15-b451-4cca48786005",
+		"name": "blps",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "equities",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{blps}}/equities/",
+							"host": [
+								"{{blps}}"
+							],
+							"path": [
+								"equities",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{blps}}/equities/1",
+							"host": [
+								"{{blps}}"
+							],
+							"path": [
+								"equities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list comments",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{blps}}/equities/1/comments",
+							"host": [
+								"{{blps}}"
+							],
+							"path": [
+								"equities",
+								"1",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"NORMAL comment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{blps}}/equities/1/comments",
+							"host": [
+								"{{blps}}"
+							],
+							"path": [
+								"equities",
+								"1",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "watchlists",
+			"item": [
+				{
+					"name": "equitites",
+					"item": [
+						{
+							"name": "add",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{blps}}/me/watchlists/1/equities/1",
+									"host": [
+										"{{blps}}"
+									],
+									"path": [
+										"me",
+										"watchlists",
+										"1",
+										"equities",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{blps}}/me/watchlists/1/equities/",
+									"host": [
+										"{{blps}}"
+									],
+									"path": [
+										"me",
+										"watchlists",
+										"1",
+										"equities",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "exclude",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{blps}}/me/watchlists/1/equities/1",
+									"host": [
+										"{{blps}}"
+									],
+									"path": [
+										"me",
+										"watchlists",
+										"1",
+										"equities",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create notification rule",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"once\": true,\r\n    \"value\": 1.2,\r\n    \"op\": \"{{compare_operator}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{blps}}/me/watchlists/1/equities/1/notification",
+									"host": [
+										"{{blps}}"
+									],
+									"path": [
+										"me",
+										"watchlists",
+										"1",
+										"equities",
+										"1",
+										"notification"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test watchlist\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{blps}}/me/watchlists/",
+							"host": [
+								"{{blps}}"
+							],
+							"path": [
+								"me",
+								"watchlists",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{blps}}/me/watchlists/",
+							"host": [
+								"{{blps}}"
+							],
+							"path": [
+								"me",
+								"watchlists",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{blps}}/me/watchlists/1",
+							"host": [
+								"{{blps}}"
+							],
+							"path": [
+								"me",
+								"watchlists",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{blps}}/me/watchlists/1",
+							"host": [
+								"{{blps}}"
+							],
+							"path": [
+								"me",
+								"watchlists",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rename",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test watchlist\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{blps}}/me/watchlists/1",
+							"host": [
+								"{{blps}}"
+							],
+							"path": [
+								"me",
+								"watchlists",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "list users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{blps}}/admin/users",
+							"host": [
+								"{{blps}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{blps}}/admin/users/2",
+							"host": [
+								"{{blps}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list hidden user comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{blps}}/admin/users/2/comments",
+							"host": [
+								"{{blps}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"2",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "publish hidden comment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{blps}}/admin/users/2/comments/3/publish",
+							"host": [
+								"{{blps}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"2",
+								"comments",
+								"3",
+								"publish"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"keks\",\r\n    \"password\": \"lol\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{blps}}/register",
+					"host": [
+						"{{blps}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "lol",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "keks",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{blps}}/login",
+					"host": [
+						"{{blps}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{blps}}/me",
+					"host": [
+						"{{blps}}"
+					],
+					"path": [
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list notifications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{blps}}/me/notifications",
+					"host": [
+						"{{blps}}"
+					],
+					"path": [
+						"me",
+						"notifications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list notification rules",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{blps}}/me/notification_rules",
+					"host": [
+						"{{blps}}"
+					],
+					"path": [
+						"me",
+						"notification_rules"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "admin",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "blps",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "compare_operator",
+			"value": "LESS"
+		}
+	]
+}
